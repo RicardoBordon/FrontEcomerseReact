@@ -1,0 +1,17 @@
+.NavLink {
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+.NavLinkButton {
+    text-decoration: none;
+    font-weight: bolder;
+    padding: 5px;
+    padding-left: 25px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+}
+
+.navBar {
+    background-color: black;
+}
