@@ -13,15 +13,37 @@ import { SvgIcon } from "@mui/material";
 import { useState } from "react";
 import { delFromCart, numItems } from "../Features/Cart/CartSlice";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 import "./styles.css";
 
 function SearchAppBar() {
   const { Logout } = useAuthContext();
   const dispatch = useDispatch();
+    //URL API
+    const base = import.meta.env.VITE_BASE_URL;
+    const endpoint = `/logout`;
 
   const outSession = (event) => {
     event.preventDefault();
-    Logout();
+    // fetch(base + endpoint, {
+    //   method: "GET",
+    //   credentials: 'include',
+    // })
+    //   .then((res) => res.json())
+    //   .then(json => console.log(json))
+    axios({
+      method: "get",
+      url: base+endpoint,
+      withCredentials: true
+    })
+    .then(function (response) {
+      alert(response.data)
+      Logout();
+    })
+    .catch(function (error) {
+      alert("Error al registrar")
+    });
+    
   };
 
   return (

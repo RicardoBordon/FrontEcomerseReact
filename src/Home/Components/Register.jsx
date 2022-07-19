@@ -15,7 +15,7 @@ import {
   Paper,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+
 
 Form
 const SignupForm = () => {
@@ -37,7 +37,7 @@ const SignupForm = () => {
 
       axios({
         method: "post",
-        url: base + endpoint,
+        url: base+endpoint,
         data: {
           email: values.email,
           name: values.name,
@@ -158,7 +158,7 @@ const SignupForm = () => {
                   color="primary"
                   type="submit"
                   title="Submit"
-                  onClick={formik.resetForm}
+                  // onClick={formik.resetForm}
                 >
                   Enviar
                 </Button>

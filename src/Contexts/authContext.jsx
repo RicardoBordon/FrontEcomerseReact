@@ -1,18 +1,17 @@
 import { createContext, useMemo, useState, useCallback, useContext } from "react";
 import PropTypes from 'prop-types';
-import Cookies from "universal-cookie";
-
 
 export const AuthContext = createContext();
 
 export function AuthContextProvider({children}) {
-    const cookies = new Cookies();
+
+    
     const [isAuthenticated, setIsAuthenticaded] = useState(false );
     
     const [isAdminAuthenticated, setIsAdminAuthenticaded] = useState(false);    
 
-    const Login = useCallback(function() {                                                                   
-        setIsAuthenticaded(true);
+    const login = useCallback(function() {                                                                   
+         setIsAuthenticaded(true);
     }, []);
 
     const Admin = useCallback(function() {                                                                   
@@ -20,19 +19,19 @@ export function AuthContextProvider({children}) {
     }, []);
 
     const Logout = useCallback(function() {
-        cookies.remove("token");
-        cookies.remove("tokenAdmin");
+
+
         setIsAuthenticaded(false);
         setIsAdminAuthenticaded(false);
     }, []);
 
     const value = useMemo(() => ({
-        Login,
+        login,
         Admin,
         Logout,
         isAuthenticated,
         isAdminAuthenticated
-    }), [Login, Admin, Logout,isAuthenticated, isAdminAuthenticated, Admin]);
+    }), [login, Admin, Logout,isAuthenticated, isAdminAuthenticated]);
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -68,10 +68,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   const [checked] = React.useState(true);
 
   useEffect(() => {
-     fetch(base+endpoint)
+    fetch(base + endpoint, {
+      method: "GET",
+    })
     .then(res => res.json())
-    .then(json => {setData(json); setDataFilter(json)})
-;
+    .then(json => {setData(json); setDataFilter(json)});
     }, [])
 
     const handleChange=e=>{

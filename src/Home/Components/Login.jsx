@@ -17,8 +17,8 @@ import { useState } from "react";
 import { useAuthContext } from "../../Contexts/authContext";
 import { Navigate, NavLink } from "react-router-dom";
 import { ADMIN, HOME, PRIVATE } from "../../Config/Routes/paths";
-import Cookies from "universal-cookie";
-import "../../Shop/Components/styles.css"
+import "../../Shop/Components/styles.css";
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -41,39 +41,43 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
+
   //URL API
   const base = import.meta.env.VITE_BASE_URL;
   const endpoint = `/login`;
 
-  const [token, setToken] = useState({});
-  const { Login, Admin } = useAuthContext();
-  const cookies = new Cookies();
+  // const [token, setToken] = useState({});
+  const token = ""; const expire = "";
+
+  const { login, Admin} = useAuthContext()
  
   let handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-      fetch(base + endpoint, {
-        method: "POST",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((json) => setToken(json))
-        .catch(console.log(token.error))
-  }
-  
 
-  //Acceso Usuarios
-  if (token.token !== undefined) {
-    cookies.set("token", token.token);
-    Login();
-    return <Navigate to={PRIVATE} />;
-  }
-  //Acceso Admin
-  else if (token.tokenAdmin !== undefined) {
-    cookies.set("tokenAdmin", token.tokenAdmin);
-    Admin();
-    return <Navigate to={ADMIN} />;
-  }
+  axios({
+    method: "post",
+    url: base+endpoint,
+    data: data,
+    withCredentials: true,
+  })
+  .then(function (response) {
+    console.log(response.data.tokenAdmin)
+    if (response.data.tokenAdmin !== undefined) {
+      Admin();
+      return <Navigate to={ADMIN} />;
+    }
+    else if (response.data.token !== undefined) {
+      login();
+      return <Navigate to={PRIVATE} />;
+    }
+
+    }
+  )
+  .catch(function (error) {
+    alert("Error al registrar")
+  });
+}
 
   return (
     <ThemeProvider theme={theme}>
