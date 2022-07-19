@@ -18,7 +18,7 @@ import { addtoCart } from '../Features/Cart/CartSlice';
   const itemID = window.location.pathname;
   const ID =  itemID.split("/").pop();
 
-  const BASE = "http://localhost:5000/api/v1";
+  const BASE = import.meta.env.VITE_BASE_URL;
   const endpoint= `/singleProduct/${ID}`;
   const [datas, setDatas] = useState({});
   const dispatch = useDispatch();

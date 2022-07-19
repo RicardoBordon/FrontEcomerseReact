@@ -42,8 +42,8 @@ const theme = createTheme();
 
 export default function Login() {
   //URL API
-  const base = "http://localhost:5000/api/v1/";
-  const endpoint = `login`;
+  const base = import.meta.env.VITE_BASE_URL;
+  const endpoint = `/login`;
 
   const [token, setToken] = useState({});
   const { Login, Admin } = useAuthContext();

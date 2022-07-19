@@ -5,7 +5,7 @@ const Delete = () => {
   const ID = itemID.split("/").pop();
   const cookies = new Cookies();
 
-  const base = "http://localhost:5000/api/v1/";
+  const base = import.meta.env.VITE_BASE_URL;
   const endpoint = `deleteProduct/${ID}`;
 
   fetch(base + endpoint, {

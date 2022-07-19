@@ -17,7 +17,7 @@ const Create = () => {
   const [file, setFile] = useState([]);
 
   //URL a API
-  const base = "http://localhost:5000/api/v1/";
+  const base = import.meta.env.VITE_BASE_URL;
   const endpoint = `createProduct`;
 
   //cambia estadp al recibir una imagen

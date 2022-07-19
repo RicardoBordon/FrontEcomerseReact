@@ -22,9 +22,9 @@ const Edit = () => {
   const cookies = new Cookies();
 
   //URL a API
-  const base = "http://localhost:5000/api/v1/";
-  const endpoint1 = `admin/singleProduct/${ID}`;
-  const endpoint2 = `updateProduct/${ID}`;
+  const base = import.meta.env.VITE_BASE_URL;
+  const endpoint1 = `/admin/singleProduct/${ID}`;
+  const endpoint2 = `/updateProduct/${ID}`;
 
   const [datas, setDatas] = useState([]);
 

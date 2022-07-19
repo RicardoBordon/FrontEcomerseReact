@@ -60,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
  function Shop(){
-  const BASE = "http://localhost:5000/api/v1";
+  const base = import.meta.env.VITE_BASE_URL;
   const endpoint= "/allProducts";
   const [data, setData] = useState([])
   const [search, setSearch] = useState([])
@@ -68,7 +68,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   const [checked] = React.useState(true);
 
   useEffect(() => {
-     fetch(BASE+endpoint)
+     fetch(base+endpoint)
     .then(res => res.json())
     .then(json => {setData(json); setDataFilter(json)})
 ;

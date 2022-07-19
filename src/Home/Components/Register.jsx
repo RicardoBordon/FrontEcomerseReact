@@ -20,8 +20,8 @@ import { useState } from "react";
 Form
 const SignupForm = () => {
   //URL API
-  const base = "http://localhost:5000/api/v1/";
-  const endpoint = `register`;
+  const base = import.meta.env.VITE_BASE_URL;
+  const endpoint = `/register`;
 
 
   const formik = useFormik({

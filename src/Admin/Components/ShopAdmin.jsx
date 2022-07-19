@@ -59,8 +59,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function ShopAdmin() {
   //URL API
-  const BASE = "http://localhost:5000/api/v1/";
-  const endpoint = "allProducts";
+  const BASE = import.meta.env.VITE_BASE_URL;
+  const endpoint = "/allProducts";
 
   const [data, setData] = useState([]);
   const [search, setSearch] = useState([]);
