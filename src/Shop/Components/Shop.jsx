@@ -89,7 +89,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
           return elemento;
         }
       })
-      setDataFilter(res);
+      setDataFilter(res)
     }
 
   return (
