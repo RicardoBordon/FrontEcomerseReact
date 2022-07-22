@@ -15,11 +15,11 @@ import {
 } from "@mui/material";
 import Cookies from "universal-cookie";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useAuthContext } from "../../Contexts/authContext";
 
 const Edit = () => {
   const itemID = window.location.pathname;
   const ID = itemID.split("/").pop();
-  const cookies = new Cookies();
 
   //URL a API
   const base = import.meta.env.VITE_BASE_URL;
@@ -27,13 +27,14 @@ const Edit = () => {
   const endpoint2 = `/updateProduct/${ID}`;
 
   const [datas, setDatas] = useState([]);
+  const { globalAdminToken} = useAuthContext()
 
   useEffect(() => {
     fetch(base+endpoint1, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + cookies.get("tokenAdmin"),
+        Authorization: "Bearer " + globalAdminToken.tokenAdmin,
       },
     })
       .then((res) => res.json())
@@ -81,7 +82,7 @@ const Edit = () => {
 
     fetch(base + endpoint2, {
       headers: {
-        Authorization: "Bearer " + cookies.get("tokenAdmin"),
+        Authorization: "Bearer " + globalAdminToken.tokenAdmin,
       },
       method: "POST",
       body: formdata,

@@ -21,19 +21,18 @@ import { AuthContextProvider } from "./Contexts/authContext";
 import PublicRoute from "./Router/PublicRoute";
 import PrivateRouter from "./Router/PrivateRoute";
 import PrivateRouterAdmin from "./Router/PrivaterouteAdmin";
-import { PRIVATE } from "./Config/Routes/paths";
+import { HOME, PRIVATE } from "./Config/Routes/paths";
 import { ADMIN } from "./Config/Routes/paths";
 import CartBuyScreen from "./Shop/Screens/CartBuyScreen";
 
-function App() {
+function App() { 
   return (
     <>
-      <AuthContextProvider>
+      <AuthContextProvider> 
       <BrowserRouter>
         <Routes>
-
           {/* Public */}
-          <Route path="/" element={<PublicRoute/>}>
+          <Route path={HOME} element={<PublicRoute/>}>
           {<Route index element={<HomeShopScreen/>} exact />}
           {<Route path="/login" element={<HomeLoginScreen/>} exact />}
           {<Route path="/register" element={<HomeRegisterScreen />} exact />}

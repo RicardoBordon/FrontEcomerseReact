@@ -12,13 +12,12 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 import { useState } from "react";
 import { useAuthContext } from "../../Contexts/authContext";
 import { Navigate, NavLink } from "react-router-dom";
-import { ADMIN, HOME, PRIVATE } from "../../Config/Routes/paths";
+import { ADMIN, HOME, LOGIN, PRIVATE } from "../../Config/Routes/paths";
 import "../../Shop/Components/styles.css";
-import axios from 'axios';
+import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -41,43 +40,97 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
-
+  let users = "";
   //URL API
   const base = import.meta.env.VITE_BASE_URL;
   const endpoint = `/login`;
+  const endpoint2 = `/refresh`;
+  const endpoint3 = `/refreshAdmin`;
 
-  // const [token, setToken] = useState({});
-  const token = ""; const expire = "";
+  const [token, setToken] = useState({});
+  // const token = ""; const expire = "";
 
-  const { login, Admin} = useAuthContext()
- 
+  const {
+    login,
+    Admin,
+    globalToken,
+    globalAdminToken,
+    isAuthenticated,
+    isAdminAuthenticated,
+  } = useAuthContext();
+
   let handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-  axios({
-    method: "post",
-    url: base+endpoint,
-    data: data,
-    withCredentials: true,
-  })
-  .then(function (response) {
-    console.log(response.data.tokenAdmin)
-    if (response.data.tokenAdmin !== undefined) {
-      Admin();
-      return <Navigate to={ADMIN} />;
+    axios({
+      method: "post",
+      url: base + endpoint,
+      data: data,
+      withCredentials: true,
+    })
+      .then(function (response) {
+        if (response.data.token !== undefined) login(response.data);
+        else if (response.data.tokenAdmin !== undefined) Admin(response.data);
+      }, [])
+      .catch(function (error) {
+        alert("Credenciales incorrectas");
+      });
+  };
+
+  const RefreshToken = (users) => {
+    if (users === "user") {
+      axios({
+        method: "get",
+        url: base + endpoint2,
+        withCredentials: true,
+      })
+        .then(function (response) {
+          login(response.data);
+        }, [])
+        .catch(function (error) {
+          console.log("sin cookieee");
+        });
     }
-    else if (response.data.token !== undefined) {
-      login();
-      return <Navigate to={PRIVATE} />;
-    }
+    else if (users === "admin") {
+      axios({
+        method: "get",
+        url: base + endpoint3,
+        withCredentials: true,
+      })
+        .then(function (response) {
+          Admin(response.data);
+        }, [])
+        .catch(function (error) {
+          console.log("sin cookieee");
+        });
 
     }
-  )
-  .catch(function (error) {
-    alert("Error al registrar")
-  });
-}
+  };
+
+  if (
+    sessionStorage.getItem("user") === "true" &&
+    globalToken.token === undefined
+  ) {
+    console.log("refresh");
+    users = "user";
+    RefreshToken(users);
+  } else if (
+    sessionStorage.getItem("admin") === "true" &&
+    globalAdminToken.tokenAdmin === undefined
+  ) {
+    console.log("refreshadmin");
+    users = "admin";
+    RefreshToken(users);
+  }
+  console.log(globalToken.token);
+  console.log(globalAdminToken.tokenAdmin);
+
+  if (isAuthenticated) {
+    return <Navigate to={PRIVATE} />;
+  } else if (isAdminAuthenticated) {
+    return <Navigate to={ADMIN} />;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -167,13 +220,15 @@ export default function Login() {
                   </NavLink>
                 </Grid>
               </Grid>
-              
-              <NavLink to={"/"} variant="body2" color="inherit" underline="none" className="NavLinkButton">
-                <Button
-                  variant="contained"
-                  sx={{ mt: 10 }}
-                  color="warning"
-                >
+
+              <NavLink
+                to={"/"}
+                variant="body2"
+                color="inherit"
+                underline="none"
+                className="NavLinkButton"
+              >
+                <Button variant="contained" sx={{ mt: 10 }} color="warning">
                   Volver a Home...
                 </Button>
               </NavLink>

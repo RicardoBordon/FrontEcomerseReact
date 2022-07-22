@@ -8,6 +8,7 @@ import InputBase from "@mui/material/InputBase";
 import { useAuthContext } from "../../Contexts/authContext";
 import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,10 +54,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function NavBaradmin() {
   const { Logout } = useAuthContext();
+  //URL API
+  const base = import.meta.env.VITE_BASE_URL;
+  const endpoint = `/logout`;
 
   const outSession = (event) => {
     event.preventDefault();
-    Logout();
+    axios({
+      method: "get",
+      url: base+endpoint,
+      withCredentials: true,
+    })
+    .then(function (response) {
+      Logout();
+    })
+    .catch(function (error) {
+      alert("Error")
+    });
+    
   };
   return (
     <Box sx={{ flexGrow: 1 }}>

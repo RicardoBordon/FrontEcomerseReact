@@ -1,45 +1,78 @@
-import { createContext, useMemo, useState, useCallback, useContext } from "react";
-import PropTypes from 'prop-types';
+import {
+  createContext,
+  useMemo,
+  useState,
+  useCallback,
+  useContext,
+} from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
-export function AuthContextProvider({children}) {
+export function AuthContextProvider({ children }) {
+  //URL API
+  const base = import.meta.env.VITE_BASE_URL;
+  const endpoint2 = `/refresh`;
 
-    
-    const [isAuthenticated, setIsAuthenticaded] = useState(false );
-    
-    const [isAdminAuthenticated, setIsAdminAuthenticaded] = useState(false);    
+  const [isAuthenticated, setIsAuthenticaded] = useState(false);
 
-    const login = useCallback(function() {                                                                   
-         setIsAuthenticaded(true);
-    }, []);
+  const [isAdminAuthenticated, setIsAdminAuthenticaded] = useState(false);
 
-    const Admin = useCallback(function() {                                                                   
-        setIsAdminAuthenticaded(true);
-    }, []);
+  const [globalToken, setGlobalToken] = useState({});
 
-    const Logout = useCallback(function() {
+  const [globalAdminToken, setAdminGlobalToken] = useState({});
 
+  
+  const login = useCallback(function (token) {
+    sessionStorage.setItem("user", true);
+    setGlobalToken(token);
+    setIsAuthenticaded(true);
+  }, []);
 
-        setIsAuthenticaded(false);
-        setIsAdminAuthenticaded(false);
-    }, []);
+  const Admin = useCallback(function (token) {
+    sessionStorage.setItem("admin", true);
+    setAdminGlobalToken(token);
+    setIsAdminAuthenticaded(true);
+  }, []);
 
-    const value = useMemo(() => ({
-        login,
-        Admin,
-        Logout,
-        isAuthenticated,
-        isAdminAuthenticated
-    }), [login, Admin, Logout,isAuthenticated, isAdminAuthenticated]);
+  const Logout = useCallback(async function () {
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("admin");
+    setIsAuthenticaded(false);
+    setIsAdminAuthenticaded(false);
+    setGlobalToken("");
+    setAdminGlobalToken("");
+  }, []);
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  const value = useMemo(
+    () => ({
+      login,
+      Admin,
+      Logout,
+      isAuthenticated,
+      isAdminAuthenticated,
+      globalToken,
+      globalAdminToken,
+    }),
+    [
+      login,
+      Admin,
+      Logout,
+      isAuthenticated,
+      isAdminAuthenticated,
+      globalToken,
+      globalAdminToken,
+    ]
+  );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 AuthContextProvider.propTypes = {
-    children: PropTypes.object
+  children: PropTypes.object,
 };
 
 export function useAuthContext() {
-    return useContext(AuthContext);
+  return useContext(AuthContext);
 }

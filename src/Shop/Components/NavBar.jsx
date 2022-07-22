@@ -25,23 +25,16 @@ function SearchAppBar() {
 
   const outSession = (event) => {
     event.preventDefault();
-    // fetch(base + endpoint, {
-    //   method: "GET",
-    //   credentials: 'include',
-    // })
-    //   .then((res) => res.json())
-    //   .then(json => console.log(json))
     axios({
       method: "get",
       url: base+endpoint,
-      withCredentials: true
+      withCredentials: true,
     })
     .then(function (response) {
-      alert(response.data)
       Logout();
     })
     .catch(function (error) {
-      alert("Error al registrar")
+      alert("Error")
     });
     
   };

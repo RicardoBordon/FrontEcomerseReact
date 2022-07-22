@@ -8,15 +8,14 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { Button, Fade } from '@mui/material';
-import Cookies from 'universal-cookie';
 import { useDispatch } from 'react-redux';
 import { addtoCart } from '../Features/Cart/CartSlice';
+import { useAuthContext } from "../../Contexts/authContext";
 
  function SingleProduct(){
-  const cookies = new Cookies();
-
   const itemID = window.location.pathname;
   const ID =  itemID.split("/").pop();
+  const { globalToken } = useAuthContext()
 
   const BASE = import.meta.env.VITE_BASE_URL;
   const endpoint= `/singleProduct/${ID}`;
@@ -30,7 +29,7 @@ import { addtoCart } from '../Features/Cart/CartSlice';
       method: "GET",
       headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + cookies.get("token")
+      Authorization: "Bearer " + globalToken.token
     }
   })
     .then(res => res.json())
