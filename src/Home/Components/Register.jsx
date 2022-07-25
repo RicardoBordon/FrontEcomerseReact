@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, useFormik } from "formik";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 import {
   Input,
@@ -47,11 +48,19 @@ const SignupForm = () => {
           password: values.password,
         },
       })
-      .then(function (response) {
-        alert("Registrado correctamente, verifique correo no deseado")
+      .then(function () {
+        Swal.fire({
+          text: 'Registrado correctamente, verifique correo no deseado',
+          icon: 'sucess',
+          confirmButtonText: 'Ok'
+        })
       })
-      .catch(function (error) {
-        alert("Error al registrar")
+      .catch(function () {
+        Swal.fire({
+          text: 'Error al registrar...',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
       });
 
       }

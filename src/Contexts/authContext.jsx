@@ -6,14 +6,12 @@ import {
   useContext,
 } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 
 export const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   //URL API
   const base = import.meta.env.VITE_BASE_URL;
-  const endpoint2 = `/refresh`;
 
   const [isAuthenticated, setIsAuthenticaded] = useState(false);
 

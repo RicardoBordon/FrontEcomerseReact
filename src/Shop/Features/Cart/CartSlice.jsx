@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import Swal from 'sweetalert2';
 
 
 const initialState = {
@@ -11,7 +12,11 @@ const cartSlice = createSlice({
     reducers: {
         addtoCart(state, payload) {
             state.item.push(payload.payload);
-                alert("Agregado a Carrito");
+            Swal.fire({
+                text: 'Agregado al carrito...',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+              })
         },
         numItems(state){
             let index = 0;
@@ -25,7 +30,11 @@ const cartSlice = createSlice({
             state.item.forEach(element => {
                     element.count = index++;
             });
-            alert("Eliminado de Carrito");
+            Swal.fire({
+                text: 'Eliminado de carrito...',
+                icon: 'warning',
+                confirmButtonText: 'Ok'
+              })
 
         },
     }

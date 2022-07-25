@@ -1,5 +1,5 @@
 import React from "react";
-
+import Swal from 'sweetalert2';
 import { useState, useEffect } from "react";
 import {
   Input,
@@ -13,7 +13,6 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-import Cookies from "universal-cookie";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuthContext } from "../../Contexts/authContext";
 
@@ -69,7 +68,11 @@ const Edit = () => {
   //enviar imagenes al endpoint
   const sendHandler = () => {
     if (!file) {
-      alert("no hay archivo");
+      Swal.fire({
+        text: 'No hay archivo!',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      })
       return;
     }
     const formdata = new FormData();

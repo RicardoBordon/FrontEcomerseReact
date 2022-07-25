@@ -12,12 +12,12 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
 import { useAuthContext } from "../../Contexts/authContext";
 import { Navigate, NavLink } from "react-router-dom";
 import { ADMIN, HOME, LOGIN, PRIVATE } from "../../Config/Routes/paths";
 import "../../Shop/Components/styles.css";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 function Copyright(props) {
   return (
@@ -40,15 +40,13 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
+  
   let users = "";
   //URL API
   const base = import.meta.env.VITE_BASE_URL;
   const endpoint = `/login`;
   const endpoint2 = `/refresh`;
   const endpoint3 = `/refreshAdmin`;
-
-  const [token, setToken] = useState({});
-  // const token = ""; const expire = "";
 
   const {
     login,
@@ -74,7 +72,11 @@ export default function Login() {
         else if (response.data.tokenAdmin !== undefined) Admin(response.data);
       }, [])
       .catch(function (error) {
-        alert("Credenciales incorrectas");
+        Swal.fire({
+          text: 'Credenciales incorrectas',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
       });
   };
 
@@ -112,19 +114,15 @@ export default function Login() {
     sessionStorage.getItem("user") === "true" &&
     globalToken.token === undefined
   ) {
-    console.log("refresh");
     users = "user";
     RefreshToken(users);
   } else if (
     sessionStorage.getItem("admin") === "true" &&
     globalAdminToken.tokenAdmin === undefined
   ) {
-    console.log("refreshadmin");
     users = "admin";
     RefreshToken(users);
   }
-  console.log(globalToken.token);
-  console.log(globalAdminToken.tokenAdmin);
 
   if (isAuthenticated) {
     return <Navigate to={PRIVATE} />;

@@ -1,16 +1,12 @@
-import React, { Fragment } from 'react';
-import  { useEffect, useState } from "react";
+import React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Link, useParams } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import SearchIcon from '@mui/icons-material/Search';
-import { styled, alpha } from '@mui/material/styles';
-import { InputBase, Paper, Slide, useMediaQuery } from '@mui/material';
+import { Slide } from '@mui/material';
 import { useSelector } from 'react-redux/es/exports';
 import { useDispatch } from 'react-redux';
 import { Button } from '@mui/material';

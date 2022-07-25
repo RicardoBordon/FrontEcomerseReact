@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from 'sweetalert2';
 import { useState } from "react";
 import { Input, Grid, InputLabel, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -8,17 +9,16 @@ import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Cookies from "universal-cookie";
-import { Form, Formik } from "formik";
+import { useAuthContext } from "../../Contexts/authContext";
 
 const Create = () => {
-  const cookies = new Cookies();
   const [form, setForm] = useState({});
   const [file, setFile] = useState([]);
+  const { globalAdminToken} = useAuthContext()
 
   //URL a API
   const base = import.meta.env.VITE_BASE_URL;
-  const endpoint = `createProduct`;
+  const endpoint = `/createProduct`;
 
   //cambia estadp al recibir una imagen
   const selectHandler = (e) => {
@@ -39,17 +39,18 @@ const Create = () => {
     });
   };
 
-
-
   //enviar imagenes al endpoint
   const sendHandler = () => {
     if (!file) {
-      alert("no hay archivo");
+      Swal.fire({
+        text: 'No hay archivo!',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      })
       return;
     }
     const formdata = new FormData();
   
-
     formdata.append("image", file);
     formdata.append("item", form.item);
     formdata.append("name", form.name);
@@ -60,15 +61,23 @@ const Create = () => {
     fetch(base + endpoint, {
       method: "POST",
       headers: {
-      Authorization: "Bearer " + cookies.get("tokenAdmin")},
+      Authorization: "Bearer " + globalAdminToken.tokenAdmin},
       body: formdata
     })
     .then(function (response) {
       if(response.status === 400){
-        alert("Error al registrar")
+        Swal.fire({
+          text: 'Error al registrar producto...',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
       }
       else if(response.status === 201){
-        alert("Creado correctamente")
+        Swal.fire({
+          text: "Creado correctamente",
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        })
       }
     })
     .catch(function (error) {

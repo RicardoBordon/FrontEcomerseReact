@@ -29,6 +29,7 @@
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
     "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.24",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
