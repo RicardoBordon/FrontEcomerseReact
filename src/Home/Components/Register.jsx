@@ -106,16 +106,20 @@ const SignupForm = () => {
                   type="email"
                   onChange={formik.handleChange}
                   value={formik.values.email}
+                  required="true"
+                
                 ></Input>
                 <InputLabel sx={{ mt: 2 }} htmlFor="name">
                   Nombre:{" "}
                 </InputLabel>
                 <Input
+                  sx={{ width: "88%" }}
                   id="name"
                   name="name"
                   type="text"
                   onChange={formik.handleChange}
                   value={formik.values.name}
+                  required="true"
                 ></Input>
                 <InputLabel sx={{ mt: 2 }} htmlFor="lastName">
                   Apellido:{" "}
@@ -127,6 +131,7 @@ const SignupForm = () => {
                   type="text"
                   onChange={formik.handleChange}
                   value={formik.values.lastName}
+                  required="true"
                 ></Input>
                 <InputLabel sx={{ mt: 2 }} htmlFor="dni">
                   Dni:{" "}
@@ -138,6 +143,7 @@ const SignupForm = () => {
                   type="number"
                   onChange={formik.handleChange}
                   value={formik.values.dni}
+                  required="true"
                 ></Input>
                 <InputLabel sx={{ mt: 2 }} htmlFor="phone">
                   Teléfono:{" "}
@@ -149,6 +155,7 @@ const SignupForm = () => {
                   type="number"
                   onChange={formik.handleChange}
                   value={formik.values.phone}
+                  required="true"
                 ></Input>
                 <InputLabel sx={{ mt: 2 }} htmlFor="password">
                   Password:{" "}
@@ -160,6 +167,7 @@ const SignupForm = () => {
                   type="password"
                   onChange={formik.handleChange}
                   value={formik.values.password}
+                  required="true"
                 ></Input>
                 <Button
                   sx={{ mt: 8, width: "88%" }}

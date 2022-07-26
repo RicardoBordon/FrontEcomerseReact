@@ -12,9 +12,12 @@ import {
   Toolbar,
   Typography,
   Paper,
+  TextareaAutosize,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuthContext } from "../../Contexts/authContext";
+import { Navigate, Outlet } from 'react-router-dom';
+import { ADMIN } from "../../Config/Routes/paths";
 
 const Edit = () => {
   const itemID = window.location.pathname;
@@ -92,10 +95,18 @@ const Edit = () => {
     })
   .then(function (response) {
     if(response.status === 400){
-      alert("Error al registrar")
+      Swal.fire({
+        text: 'Error al registrar',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
     }
     else if(response.status === 201){
-      alert("Actualizado correctamente")
+      Swal.fire({
+        text: 'Actualizado correctamente',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      })
     }
   })
   .catch(function (error) {
@@ -122,7 +133,7 @@ const Edit = () => {
         >
           <Toolbar>
             <Typography variant="h6" color="inherit" noWrap>
-              Nuevo Producto:
+              Producto:
             </Typography>
           </Toolbar>
         </AppBar>
@@ -141,7 +152,7 @@ const Edit = () => {
                     Imagen:{" "}
                   </InputLabel>
 
-                  <Input onChange={selectHandler} type="file" name="file" />
+                  <Input onChange={selectHandler} type="file" name="file" required/>
 
                   <InputLabel sx={{ mt: 2 }} htmlFor="item">
                     Item n:{" "}
@@ -165,6 +176,7 @@ const Edit = () => {
                     type="string"
                     value={form.name || name}
                     onChange={handleChange}
+                    required
                   ></Input>
                   <InputLabel sx={{ mt: 2 }} htmlFor="price">
                     Precio (int):{" "}
@@ -176,18 +188,19 @@ const Edit = () => {
                     type="number"
                     value={form.price || price}
                     onChange={handleChange}
+                    required
                   ></Input>
                   <InputLabel sx={{ mt: 2 }} htmlFor="description">
-                    descripcion:{" "}
+                    Descripcion:{" "}
                   </InputLabel>
-                  <Input
-                    sx={{ width: "88%" }}
+                  <TextareaAutosize
                     id="description"
                     name="description"
                     type="string"
                     value={form.description || description}
                     onChange={handleChange}
-                  ></Input>
+                    required
+                  ></TextareaAutosize>
                   <InputLabel sx={{ mt: 2 }} htmlFor="cstock">
                     c.stock:{" "}
                   </InputLabel>
@@ -198,6 +211,7 @@ const Edit = () => {
                     type="number"
                     value={form.cstock || cstock}
                     onChange={handleChange}
+                    required
                   ></Input>
                 <Button
                   sx={{ mt: 8, width: "88%" }}

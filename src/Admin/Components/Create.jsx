@@ -1,7 +1,7 @@
 import React from "react";
 import Swal from 'sweetalert2';
 import { useState } from "react";
-import { Input, Grid, InputLabel, Button } from "@mui/material";
+import { Input, Grid, InputLabel, Button, TextareaAutosize } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
@@ -10,6 +10,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuthContext } from "../../Contexts/authContext";
+import { Navigate, Outlet } from 'react-router-dom';
+import { ADMIN } from "../../Config/Routes/paths";
 
 const Create = () => {
   const [form, setForm] = useState({});
@@ -71,6 +73,7 @@ const Create = () => {
           icon: 'error',
           confirmButtonText: 'Ok'
         })
+        
       }
       else if(response.status === 201){
         Swal.fire({
@@ -78,7 +81,9 @@ const Create = () => {
           icon: 'success',
           confirmButtonText: 'Ok'
         })
+        return <Navigate to={ADMIN} />;
       }
+      
     })
     .catch(function (error) {
       alert("Error en servidor")
@@ -152,16 +157,16 @@ const Create = () => {
                     onChange={handleChange}
                   ></Input>
                   <InputLabel sx={{ mt: 2 }} htmlFor="description">
-                    descripcion:{" "}
+                    Dasescripcion:{" "}
                   </InputLabel>
-                  <Input
+                  <TextareaAutosize
                     sx={{ width: "88%" }}
                     id="description"
                     name="description"
                     type="string"
                     value={form.description}
                     onChange={handleChange}
-                  ></Input>
+                  ></TextareaAutosize>
                   <InputLabel sx={{ mt: 2 }} htmlFor="cstock">
                     c.stock:{" "}
                   </InputLabel>
@@ -173,11 +178,13 @@ const Create = () => {
                     value={form.cstock}
                     onChange={handleChange}
                   ></Input>
-                                  <Button
+                  
+                  <Button
                   sx={{ mt: 8, width: "88%" }}
                   variant="contained"
                   color="primary"
-                  onClick={sendHandler}
+                  // onClick={sendHandler}
+                  type="submit"
                 >
                   Crear
                 </Button>
