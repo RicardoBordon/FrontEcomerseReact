@@ -22,10 +22,14 @@ export default function PrivateRouterAdmin() {
         console.log("sin cookieee");
       });
   };
+  //sin autorizacion no entro
 
   if (sessionStorage.getItem("admin") !== "true") {
     return <Navigate to={LOGIN} replace={true} />;
   }
+
+  //Si estoy logueado y no existe token porque recargue y se perdió de la memoria
+  // llamo a refresh para obtener un nuevo token y persistir el usuario
   else if (
     sessionStorage.getItem("admin") === "true" &&
     globalAdminToken.tokenAdmin === undefined
@@ -34,6 +38,7 @@ export default function PrivateRouterAdmin() {
     console.log("refresh");
     return <Navigate to={ADMIN}/>;
   }
+  console.log(globalAdminToken);
 
   return (
     <div>
