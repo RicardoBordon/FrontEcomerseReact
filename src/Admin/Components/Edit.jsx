@@ -16,12 +16,11 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuthContext } from "../../Contexts/authContext";
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useParams } from 'react-router-dom';
 import { ADMIN } from "../../Config/Routes/paths";
 
 const Edit = () => {
-  const itemID = window.location.pathname;
-  const ID = itemID.split("/").pop();
+  const ID = useParams().id
 
   //URL a API
   const base = import.meta.env.VITE_BASE_URL;

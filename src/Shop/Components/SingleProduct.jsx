@@ -11,18 +11,21 @@ import { Button, Fade } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { addtoCart } from '../Features/Cart/CartSlice';
 import { useAuthContext } from "../../Contexts/authContext";
+import { useParams } from 'react-router-dom';
 
  function SingleProduct(){
-  const itemID = window.location.pathname;
-  const ID =  itemID.split("/").pop();
+  const ID = useParams().id;
   const { globalToken } = useAuthContext()
 
   const BASE = import.meta.env.VITE_BASE_URL;
   const endpoint= `/singleProduct/${ID}`;
+  console.log("endpoint "+BASE+endpoint)
+
   const [datas, setDatas] = useState({});
   const dispatch = useDispatch();
 
   const [checked] = React.useState(true);
+  console.log(globalToken.token)
 
   useEffect(() => {
      fetch(BASE+endpoint, {
@@ -35,6 +38,7 @@ import { useAuthContext } from "../../Contexts/authContext";
     .then(res => res.json())
     .then(json => setDatas(json[0]))
     }, [])
+    console.log(datas)
       
    return (
    <>

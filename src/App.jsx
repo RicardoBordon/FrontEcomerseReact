@@ -2,28 +2,27 @@ import React from "react";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 //Public;
+import PublicRoute from "./Router/PublicRoute";
 import NotFound from "./Home/Screen/NotFound";
 import HomeLoginScreen from "./Home/Screen/HomeLoginScreen";
 import HomeRegisterScreen from "./Home/Screen/HomeRegisterScreen";
 import HomeShopScreen from "./Home/Screen/HomeShopScreen";
 
 //Shop Screen
+import PrivateRouter from "./Router/PrivateRoute";
 import ShopScreen from "./Shop/Screens/ShopScreen";
 import SingleProductScreen from "./Shop/Screens/SingleProductScreen";
 
 //Admin Screen
+import PrivateRouterAdmin from "./Router/PrivaterouteAdmin";
 import ShopAdminScreen from "./Admin/Screen/ShopAdminScreen";
 import EditScreen from "./Admin/Screen/EditScreen";
 import Delete from "./Admin/Components/Delete";
 import CreateAdminScreen from "./Admin/Screen/CreateAdminScreen";
 
 import { AuthContextProvider } from "./Contexts/authContext";
-import PublicRoute from "./Router/PublicRoute";
-import PrivateRouter from "./Router/PrivateRoute";
-import PrivateRouterAdmin from "./Router/PrivaterouteAdmin";
-import { HOME, PRIVATE } from "./Config/Routes/paths";
-import { ADMIN } from "./Config/Routes/paths";
 import CartBuyScreen from "./Shop/Screens/CartBuyScreen";
+import { HOME, PRIVATE, ADMIN } from "./Config/Routes/paths";
 
 function App() { 
   return (

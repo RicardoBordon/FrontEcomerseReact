@@ -1,11 +1,10 @@
 import { useAuthContext } from "../../Contexts/authContext";
 import Swal from "sweetalert2";
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useParams } from 'react-router-dom';
 import { ADMIN } from "../../Config/Routes/paths";
 
 const Delete = () => {
-  const itemID = window.location.pathname;
-  const ID = itemID.split("/").pop();
+  const ID = useParams().id
   const { globalAdminToken } = useAuthContext();
 
   const base = import.meta.env.VITE_BASE_URL;

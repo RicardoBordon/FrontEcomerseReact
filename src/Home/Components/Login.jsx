@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuthContext } from "../../Contexts/authContext";
 import { Navigate, NavLink } from "react-router-dom";
-import { ADMIN, HOME, LOGIN, PRIVATE } from "../../Config/Routes/paths";
+import { ADMIN, PRIVATE } from "../../Config/Routes/paths";
 import "../../Shop/Components/styles.css";
 import axios from "axios";
 import Swal from 'sweetalert2';
@@ -40,22 +40,10 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
-  
-  let users = "";
-  //URL API
   const base = import.meta.env.VITE_BASE_URL;
   const endpoint = `/login`;
-  const endpoint2 = `/refresh`;
-  const endpoint3 = `/refreshAdmin`;
 
-  const {
-    login,
-    Admin,
-    globalToken,
-    globalAdminToken,
-    isAuthenticated,
-    isAdminAuthenticated,
-  } = useAuthContext();
+  const { login, Admin } = useAuthContext();
 
   let handleSubmit = (event) => {
     event.preventDefault();
@@ -79,54 +67,9 @@ export default function Login() {
         })
       });
   };
-
-  const RefreshToken = (users) => {
-    if (users === "user") {
-      axios({
-        method: "get",
-        url: base + endpoint2,
-        withCredentials: true,
-      })
-        .then(function (response) {
-          login(response.data);
-        }, [])
-        .catch(function (error) {
-          console.log("sin cookieee");
-        });
-    }
-    else if (users === "admin") {
-      axios({
-        method: "get",
-        url: base + endpoint3,
-        withCredentials: true,
-      })
-        .then(function (response) {
-          Admin(response.data);
-        }, [])
-        .catch(function (error) {
-          console.log("sin cookieee");
-        });
-
-    }
-  };
-
-  if (
-    sessionStorage.getItem("user") === "true" &&
-    globalToken.token === undefined
-  ) {
-    users = "user";
-    RefreshToken(users);
-  } else if (
-    sessionStorage.getItem("admin") === "true" &&
-    globalAdminToken.tokenAdmin === undefined
-  ) {
-    users = "admin";
-    RefreshToken(users);
-  }
-
-  if (isAuthenticated) {
+  if (sessionStorage.getItem("user")) {
     return <Navigate to={PRIVATE} />;
-  } else if (isAdminAuthenticated) {
+  } else if (sessionStorage.getItem("admin")) {
     return <Navigate to={ADMIN} />;
   }
 

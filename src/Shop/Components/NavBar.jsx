@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import { Button } from "@mui/material";
 import { useAuthContext } from "../../Contexts/authContext";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { SvgIcon } from "@mui/material";
 import { useState } from "react";
@@ -15,6 +15,7 @@ import { delFromCart, numItems } from "../Features/Cart/CartSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import "./styles.css";
+import {LOGIN, PRIVATE, HOME} from '../../Config/Routes/paths';
 
 function SearchAppBar() {
   const { Logout } = useAuthContext();
@@ -36,6 +37,8 @@ function SearchAppBar() {
     .catch(function (error) {
       alert("Error")
     });
+
+    return <Navigate to={LOGIN}/>
     
   };
 
