@@ -35,7 +35,7 @@ function App() {
           {<Route index element={<HomeShopScreen/>} exact />}
           {<Route path="/login" element={<HomeLoginScreen/>} exact />}
           {<Route path="/register" element={<HomeRegisterScreen />} exact />}
-          {<Route path="*" element={<NotFound />} />}
+          {<Route path="*" element={<HomeShopScreen />} exact/>}
           </Route>
        
           {/* PrivateUser */}
