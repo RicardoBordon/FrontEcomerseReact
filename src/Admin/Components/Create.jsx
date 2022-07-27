@@ -1,7 +1,7 @@
 import React from "react";
 import Swal from 'sweetalert2';
 import { useState } from "react";
-import { Input, Grid, InputLabel, Button, TextareaAutosize } from "@mui/material";
+import { Input, Grid, InputLabel, Button, TextareaAutosize, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
@@ -43,6 +43,8 @@ const Create = () => {
 
   //enviar imagenes al endpoint
   const sendHandler = () => {
+
+
     if (!file) {
       Swal.fire({
         text: 'No hay archivo!',
@@ -67,28 +69,31 @@ const Create = () => {
       body: formdata
     })
     .then(function (response) {
-      if(response.status === 400){
-        Swal.fire({
-          text: 'Error al registrar producto...',
-          icon: 'error',
-          confirmButtonText: 'Ok'
-        })
-        
-      }
-      else if(response.status === 201){
+     if(response.ok){
         Swal.fire({
           text: "Creado correctamente",
           icon: 'success',
           confirmButtonText: 'Ok'
         })
-        return <Navigate to={ADMIN} />;
+      }  
+      else if(!response.ok){
+        Swal.fire({
+          text: 'Error al registrar producto...',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+        })
+        
       }
-      
     })
     .catch(function (error) {
-      alert("Error en servidor")
+      Swal.fire({
+        text: error,
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      })
     });
   }
+  
 
   const theme = createTheme();
 
@@ -133,6 +138,7 @@ const Create = () => {
                     type="number"
                     value={form.item}
                     onChange={handleChange}
+                    required
                   ></Input>
                   <InputLabel sx={{ mt: 2 }} htmlFor="name">
                     Nombre:{" "}
@@ -144,6 +150,7 @@ const Create = () => {
                     type="string"
                     value={form.name}
                     onChange={handleChange}
+                    required
                   ></Input>
                   <InputLabel sx={{ mt: 2 }} htmlFor="price">
                     Precio (int):{" "}
@@ -155,6 +162,7 @@ const Create = () => {
                     type="number"
                     value={form.price}
                     onChange={handleChange}
+                    required
                   ></Input>
                   <InputLabel sx={{ mt: 2 }} htmlFor="description">
                     Dasescripcion:{" "}
@@ -166,6 +174,7 @@ const Create = () => {
                     type="string"
                     value={form.description}
                     onChange={handleChange}
+                    required
                   ></TextareaAutosize>
                   <InputLabel sx={{ mt: 2 }} htmlFor="cstock">
                     c.stock:{" "}
@@ -177,14 +186,14 @@ const Create = () => {
                     type="number"
                     value={form.cstock}
                     onChange={handleChange}
+                    required
                   ></Input>
                   
                   <Button
                   sx={{ mt: 8, width: "88%" }}
                   variant="contained"
                   color="primary"
-                  // onClick={sendHandler}
-                  type="submit"
+                  onClick={sendHandler}
                 >
                   Crear
                 </Button>

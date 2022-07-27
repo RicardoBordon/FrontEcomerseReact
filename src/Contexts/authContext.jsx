@@ -13,10 +13,6 @@ export function AuthContextProvider({ children }) {
   //URL API
   const base = import.meta.env.VITE_BASE_URL;
 
-  const [isAuthenticated, setIsAuthenticaded] = useState(false);
-
-  const [isAdminAuthenticated, setIsAdminAuthenticaded] = useState(false);
-
   const [globalToken, setGlobalToken] = useState({});
 
   const [globalAdminToken, setAdminGlobalToken] = useState({});
