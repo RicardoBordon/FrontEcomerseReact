@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 //Public;
 import PublicRoute from "./Router/PublicRoute";
-import NotFound from "./Home/Screen/NotFound";
 import HomeLoginScreen from "./Home/Screen/HomeLoginScreen";
 import HomeRegisterScreen from "./Home/Screen/HomeRegisterScreen";
 import HomeShopScreen from "./Home/Screen/HomeShopScreen";
