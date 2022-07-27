@@ -155,7 +155,7 @@ function ShopAdmin() {
                       to={`/Admin/Edit/${element.item}`}
                       className="NavLinkButton"
                     >
-                      <Button variant="outlined" color="success">
+                      <Button variant="contained" color="success">
                         Editar
                       </Button>
                     </NavLink>
@@ -163,7 +163,7 @@ function ShopAdmin() {
                       to={`/Admin/Delete/${element.item}`}
                       className="NavLinkButton"
                     >
-                      <Button variant="outlined" color="error">
+                      <Button variant="contained" color="error">
                         Borrar
                       </Button>
                     </NavLink>

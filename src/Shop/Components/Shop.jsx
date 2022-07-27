@@ -140,7 +140,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
           $ {element.price},00
           </Typography>   
           </CardContent>   
-          <NavLink to={`/shop/${element.item}`} className="NavLinkButton"><Button variant="outlined" color='success'>
+          <NavLink to={`/shop/${element.item}`} className="NavLinkButton"><Button variant="contained" color='success'>
             Comprar
           </Button></NavLink> 
     </Card>
