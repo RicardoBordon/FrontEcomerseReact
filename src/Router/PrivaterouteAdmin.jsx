@@ -35,10 +35,8 @@ export default function PrivateRouterAdmin() {
     globalAdminToken.tokenAdmin === undefined
   ) {
     RefreshToken();
-    console.log("refresh");
     return <Navigate to={ADMIN}/>;
   }
-  console.log(globalAdminToken);
 
   return (
     <div>

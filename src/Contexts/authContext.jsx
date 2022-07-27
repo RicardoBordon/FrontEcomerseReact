@@ -25,20 +25,16 @@ export function AuthContextProvider({ children }) {
   const login = useCallback(function (token) {
     sessionStorage.setItem("user", true);
     setGlobalToken(token);
-    setIsAuthenticaded(true);
   }, []);
 
   const Admin = useCallback(function (token) {
     sessionStorage.setItem("admin", true);
     setAdminGlobalToken(token);
-    setIsAdminAuthenticaded(true);
   }, []);
 
   const Logout = useCallback(async function () {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("admin");
-    setIsAuthenticaded(false);
-    setIsAdminAuthenticaded(false);
     setGlobalToken("");
     setAdminGlobalToken("");
   }, []);
@@ -48,8 +44,6 @@ export function AuthContextProvider({ children }) {
       login,
       Admin,
       Logout,
-      isAuthenticated,
-      isAdminAuthenticated,
       globalToken,
       globalAdminToken,
     }),
@@ -57,8 +51,6 @@ export function AuthContextProvider({ children }) {
       login,
       Admin,
       Logout,
-      isAuthenticated,
-      isAdminAuthenticated,
       globalToken,
       globalAdminToken,
     ]

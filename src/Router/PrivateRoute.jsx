@@ -38,10 +38,8 @@ export default function PrivateRouter() {
    // llamo a refresh para obtener un nuevo token y persistir el usuario
   if ( sessionStorage.getItem("user") === "true" && globalToken.token === undefined ){
      RefreshToken();
-    console.log("refresh")
     return <Navigate to={PRIVATE}/>
   }
-  console.log(globalToken)
 
     return (
         <div>
