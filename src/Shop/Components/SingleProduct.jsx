@@ -35,7 +35,7 @@ function SingleProduct() {
     })
       .then((res) => res.json())
       .then((json) => setDatas(json[0]));
-  });
+  }, []);
 
   return (
     <>
