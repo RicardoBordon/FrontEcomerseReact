@@ -45,7 +45,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(9)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(5)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
@@ -94,8 +94,8 @@ function ShopAdmin() {
 
   return (
     <>
-      <Container sx={{ py: 1, boxShadow: 0 }} maxWidth="md">
-        <Container sx={{ py: 4 }}>
+      <Container sx={{ py: 2, boxShadow: 4 }} maxWidth="md">
+        <Container sx={{ p:5  }}>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -125,7 +125,8 @@ function ShopAdmin() {
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    boxShadow: 3,
+                    boxShadow: 24,
+                    padding: 1
                   }}
                 >
                   <CardMedia
@@ -134,40 +135,43 @@ function ShopAdmin() {
                     height="280"
                     image={element.image}
                   />
-                  <CardContent>
+                  <CardContent
+                    sx={{ height: "38px", bgcolor: "gray", padding: "5px" }}
+                  >
                     <Typography
                       gutterBottom
                       variant="body2"
                       component="div"
                       mt={0}
-                      align="left"
+                      align="center"
+                      sx={{ color: "white" }}
                     >
                       {element.name}
                     </Typography>
                   </CardContent>
                   <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
+                    <Typography gutterBottom variant="h6" component="div" align="center"  sx={{ color:"#dd2c00", height: "15px"}}>
                       $ {element.price},00
                     </Typography>
                   </CardContent>
-                  <CardActions>
+ 
                     <NavLink
                       to={`/Admin/Edit/${element.item}`}
                       className="NavLinkButton"
                     >
-                      <Button variant="contained" color="success">
+                      <Button variant="contained" color="success" sx={{ width: "100%"}}>
                         Editar
                       </Button>
                     </NavLink>
+
                     <NavLink
                       to={`/Admin/Delete/${element.item}`}
                       className="NavLinkButton"
                     >
-                      <Button variant="contained" color="error">
+                      <Button variant="contained" color="error" sx={{ width: "100%"}}>
                         Borrar
                       </Button>
                     </NavLink>
-                  </CardActions>
                 </Card>
               </Grow>
             </Grid>
@@ -179,24 +183,3 @@ function ShopAdmin() {
 }
 
 export default ShopAdmin;
-//          <Link to={`/Admin/Edit/${element.item}`} className="btn btn-primary">
-//             Editar
-//           </Link>
-//           <Link to={`/Admin/Delete/${element.item}`} className="btn btn-primary">
-//             Borrar
-//           </Link>
-//         </CardActions>
-//     </Card>
-//     </Grid>
-//     ))}
-//     </Grid>
-//     </Container>
-
-//     <Link to={`/Admin/Create`} className="btn btn-primary">
-//             Agregar nuevo Producto
-//           </Link>
-//   </>
-//   )
-// }
-
-// export default ShopAdmin;

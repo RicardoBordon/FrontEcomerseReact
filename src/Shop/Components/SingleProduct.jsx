@@ -26,7 +26,7 @@ function SingleProduct() {
   const [checked] = React.useState(true);
 
   useEffect(() => {
-    fetch(BASE + endpoint, {
+      fetch(BASE + endpoint, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ function SingleProduct() {
     })
       .then((res) => res.json())
       .then((json) => setDatas(json[0]));
-  }, []);
+  });
 
   return (
     <>
@@ -46,9 +46,9 @@ function SingleProduct() {
       >
         <Grid
           container
-          spacing={1}
+          spacing={2}
           justifyContent="center"
-          sx={{ p: { md: 8, xs: 1, sm: 2 } }}
+          sx={{ p: { md: 8, xs: 2, sm: 2 } }}
         >
           <Grid item xs={4}>
             <Card
@@ -80,7 +80,7 @@ function SingleProduct() {
               <Typography
                 gutterBottom
                 component="div"
-                sx={{ m: { md: 8, xs: 1, sm: 2 } }}
+                sx={{ m: { md: 8, xs: 4, sm: 4 } }}
               >
                 <Grid
                   container
@@ -90,7 +90,7 @@ function SingleProduct() {
                   alignItems="flex-start"
                 >
                   <Grid item xs={12}>
-                    <Typography variant="h6">{datas.name}</Typography>
+                    <Typography variant="h5">{datas.name}</Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <Typography variant="h6">
@@ -98,7 +98,7 @@ function SingleProduct() {
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography variant="h6">Stock: {datas.cstock}</Typography>
+                    <Typography variant="body2">Stock: {datas.cstock}</Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <Button
@@ -117,7 +117,7 @@ function SingleProduct() {
             <Card sx={{ boxShadow: 3 }}>
               <Typography
                 gutterBottom
-                variant="body1"
+                variant="body3"
                 component="div"
                 align="left"
                 sx={{ m: 4 }}

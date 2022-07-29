@@ -1,7 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import  { useEffect, useState } from "react";
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
@@ -9,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
-import { Box, InputBase } from '@mui/material';
+import { InputBase } from '@mui/material';
 import { Button } from "@mui/material";
 import { NavLink } from 'react-router-dom';
 import Grow from '@mui/material/Grow';
@@ -46,7 +45,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(9)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(6)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -95,7 +94,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   return (
   <>
 
-  <Container sx={{ py: 1, boxShadow: 0 }} maxWidth="md">
+  <Container sx={{ py: 1}} maxWidth="md">
   <Container sx={{ py:4 }}>
   <Search>
             <SearchIconWrapper>
@@ -113,7 +112,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
           </Search>
           </Container>
 
-  <Grid container spacing={4}>
+  <Grid container spacing={5}>
   
   
     {dataFilter.map((element) => ( 
@@ -124,23 +123,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
               style={{ transformOrigin: '0 0 0' }}
               {...(checked ? { timeout: 1200 } : {})}
             >
-      <Card  sx={{ height: '100%', display: 'flex', flexDirection: 'column', boxShadow:3}} >
+      <Card  sx={{ height: '100%', display: 'flex', flexDirection: 'column', boxShadow:18}} >
       <CardMedia
         component="img"
         alt="Vino"
         height="280"
+        
         image={element.image} />
-        <CardContent >
-          <Typography gutterBottom variant="body2" component="div" mt={0} align="left">
+        <CardContent  sx={{ height: '38px', bgcolor:"gray", padding:"5px"}}>
+          <Typography gutterBottom variant="body2" component="div" mt={0} align="center" sx={{ color:"white"}}>
            {element.name}
           </Typography>
           </CardContent>
-          <CardContent>  
-          <Typography gutterBottom variant="h6" component="div" >
+          <CardContent sx={{ bgcolor:"#eeeeee"}}>  
+          <Typography gutterBottom variant="h6" component="div" align="center" mt={-1} sx={{ color:"#dd2c00", height: "15px"}}>
           $ {element.price},00
           </Typography>   
           </CardContent>   
-          <NavLink to={`/shop/${element.item}`} className="NavLinkButton"><Button variant="contained" color='success'>
+          <NavLink to={`/shop/${element.item}`} className="NavLinkButton" sx={{ bgcolor: "#461E23"}}><Button sx={{ width: "80%"}} variant="inherit">
             Comprar
           </Button></NavLink> 
     </Card>

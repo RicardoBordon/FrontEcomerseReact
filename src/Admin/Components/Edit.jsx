@@ -93,17 +93,18 @@ const Edit = () => {
       body: formdata,
     })
   .then(function (response) {
-    if(response.status === 400){
-      Swal.fire({
-        text: 'Error al registrar',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      })
-    }
-    else if(response.status === 201){
+    console.log(response)
+    if(response.ok === true){
       Swal.fire({
         text: 'Actualizado correctamente',
         icon: 'success',
+        confirmButtonText: 'Ok'
+      })
+    }
+    else if(response.ok === false){
+      Swal.fire({
+        text: 'Error al registrar',
+        icon: 'error',
         confirmButtonText: 'Ok'
       })
     }
@@ -123,20 +124,21 @@ const Edit = () => {
         <CssBaseline />
         <AppBar
           position="absolute"
-          color="primary"
-          elevation={4}
+          elevation={5}
           sx={{
             position: "relative",
             borderBottom: (t) => `1px solid ${t.palette.divider}`,
+            bgcolor:"black",
           }}
         >
           <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
+            <Typography variant="h7" color="inherit" noWrap>
               Producto:
             </Typography>
           </Toolbar>
         </AppBar>
-        <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+        
+        <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
           <Paper
             elevation={24}
             variant="elevation"
@@ -147,13 +149,13 @@ const Edit = () => {
             <Grid container spacing={3}>
               <Grid item xs={12} md={12} lg={12} sx={{ ml: 5, mt: 2, mb: 5 }}>
                 <form onSubmit={sendHandler}>
-                  <InputLabel sx={{ mt: 2 }} htmlFor="image">
+                  <InputLabel sx={{ color:"blueviolet"}} htmlFor="image">
                     Imagen:{" "}
                   </InputLabel>
 
                   <Input onChange={selectHandler} type="file" name="file" required/>
 
-                  <InputLabel sx={{ mt: 2 }} htmlFor="item">
+                  <InputLabel sx={{ mt: 4, color:"blueviolet"  }} htmlFor="item">
                     Item n:{" "}
                   </InputLabel>
                   <Input
@@ -165,7 +167,7 @@ const Edit = () => {
                     onChange={handleChange}
                     disabled
                   ></Input>
-                  <InputLabel sx={{ mt: 2 }} htmlFor="name">
+                  <InputLabel sx={{ mt: 4, color:"blueviolet"  }} htmlFor="name">
                     Nombre:{" "}
                   </InputLabel>
                   <Input
@@ -177,7 +179,7 @@ const Edit = () => {
                     onChange={handleChange}
                     required
                   ></Input>
-                  <InputLabel sx={{ mt: 2 }} htmlFor="price">
+                  <InputLabel sx={{ mt: 4,color:"blueviolet"}} htmlFor="price">
                     Precio (int):{" "}
                   </InputLabel>
                   <Input
@@ -189,18 +191,20 @@ const Edit = () => {
                     onChange={handleChange}
                     required
                   ></Input>
-                  <InputLabel sx={{ mt: 2 }} htmlFor="description">
+                  <InputLabel sx={{ mt: 4, color:"blueviolet"  }} htmlFor="description">
                     Descripcion:{" "}
                   </InputLabel>
                   <TextareaAutosize
+
                     id="description"
                     name="description"
                     type="string"
                     value={form.description || description}
                     onChange={handleChange}
                     required
+                    style={{ width: "88%" }}
                   ></TextareaAutosize>
-                  <InputLabel sx={{ mt: 2 }} htmlFor="cstock">
+                  <InputLabel sx={{ mt: 4, color:"blueviolet" }} htmlFor="cstock">
                     c.stock:{" "}
                   </InputLabel>
                   <Input

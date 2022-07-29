@@ -9,33 +9,30 @@ export default function PrivateRouterAdmin() {
 
   const { Admin, globalAdminToken } = useAuthContext();
 
-  const RefreshToken = () => {
-    axios({
+  const RefreshToken = async () => {
+    await axios({
       method: "get",
       url: base + endpoint,
       withCredentials: true,
     })
-      .then(function (response) {
-        Admin(response.data);
+      .then(async function (response) {
+        await Admin(response.data);
       }, [])
-      .catch(function (error) {
+      .catch(async function (error) {
         console.log("sin cookieee");
       });
   };
-  //sin autorizacion no entro
-
-  if (sessionStorage.getItem("admin") !== "true") {
-    return <Navigate to={LOGIN} replace={true} />;
-  }
-
-  //Si estoy logueado y no existe token porque recargue y se perdió de la memoria
-  // llamo a refresh para obtener un nuevo token y persistir el usuario
-  else if (
+  
+  if (
     sessionStorage.getItem("admin") === "true" &&
     globalAdminToken.tokenAdmin === undefined
   ) {
     RefreshToken();
-    return <Navigate to={ADMIN}/>;
+    return <Navigate to={ADMIN} replace={true}/>;
+  }
+
+  else if (sessionStorage.getItem("admin") !== "true") {
+    return <Navigate to={LOGIN} replace={true} />;
   }
 
   return (

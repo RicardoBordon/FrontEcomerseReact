@@ -108,15 +108,16 @@ const Create = () => {
           sx={{
             position: "relative",
             borderBottom: (t) => `1px solid ${t.palette.divider}`,
+            bgcolor:"black",
           }}
         >
           <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
+            <Typography variant="h7" color="inherit" noWrap>
               Nuevo Producto:
             </Typography>
           </Toolbar>
         </AppBar>
-        <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+        <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
           <Paper
             elevation={24}
             variant="elevation"
@@ -125,10 +126,10 @@ const Create = () => {
             <Grid container spacing={3}>
               <Grid item xs={12} md={12} lg={12} sx={{ ml: 5, mt: 2, mb: 5 }}>
                 <form onSubmit={sendHandler}>
-                  <InputLabel htmlFor="image">Imagen: </InputLabel>
+                  <InputLabel sx={{ color:"blueviolet"}} htmlFor="image">Imagen: </InputLabel>
                   <Input onChange={selectHandler} type="file" name="file" />
 
-                  <InputLabel sx={{ mt: 2 }} htmlFor="item">
+                  <InputLabel sx={{ mt: 4, color:"blueviolet" }} htmlFor="item">
                     Item n:{" "}
                   </InputLabel>
                   <Input
@@ -140,7 +141,7 @@ const Create = () => {
                     onChange={handleChange}
                     required
                   ></Input>
-                  <InputLabel sx={{ mt: 2 }} htmlFor="name">
+                  <InputLabel sx={{ mt: 4, color:"blueviolet" }} htmlFor="name">
                     Nombre:{" "}
                   </InputLabel>
                   <Input
@@ -152,7 +153,7 @@ const Create = () => {
                     onChange={handleChange}
                     required
                   ></Input>
-                  <InputLabel sx={{ mt: 2 }} htmlFor="price">
+                  <InputLabel sx={{ mt: 4, color:"blueviolet" }} htmlFor="price">
                     Precio (int):{" "}
                   </InputLabel>
                   <Input
@@ -164,7 +165,7 @@ const Create = () => {
                     onChange={handleChange}
                     required
                   ></Input>
-                  <InputLabel sx={{ mt: 2 }} htmlFor="description">
+                  <InputLabel sx={{ mt: 4, color:"blueviolet" }} htmlFor="description">
                     Dasescripcion:{" "}
                   </InputLabel>
                   <TextareaAutosize
@@ -175,8 +176,10 @@ const Create = () => {
                     value={form.description}
                     onChange={handleChange}
                     required
+                    style={{ width: "88%" }}
+                    minRows={4}
                   ></TextareaAutosize>
-                  <InputLabel sx={{ mt: 2 }} htmlFor="cstock">
+                  <InputLabel sx={{ mt: 4, color:"blueviolet" }} htmlFor="cstock">
                     c.stock:{" "}
                   </InputLabel>
                   <Input

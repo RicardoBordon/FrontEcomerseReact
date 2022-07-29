@@ -45,19 +45,19 @@ export default function Login() {
 
   const { login, Admin } = useAuthContext();
 
-  let handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    axios({
+    await axios({
       method: "post",
       url: base + endpoint,
       data: data,
       withCredentials: true,
     })
-      .then(function (response) {
-        if (response.data.token !== undefined) login(response.data);
-        else if (response.data.tokenAdmin !== undefined) Admin(response.data);
+      .then(async function (response) {
+        if (response.data.token !== undefined)await login(response.data);
+        else if (response.data.tokenAdmin !== undefined)await Admin(response.data);
       }, [])
       .catch(function (error) {
         Swal.fire({
@@ -108,7 +108,7 @@ export default function Login() {
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h6">
               Sign in
             </Typography>
             <Box
@@ -161,18 +161,6 @@ export default function Login() {
                   </NavLink>
                 </Grid>
               </Grid>
-
-              <NavLink
-                to={"/"}
-                variant="body2"
-                color="inherit"
-                underline="none"
-                className="NavLinkButton"
-              >
-                <Button variant="contained" sx={{ mt: 10 }} color="warning">
-                  Volver a Home...
-                </Button>
-              </NavLink>
               <Copyright sx={{ mt: 9 }} />
             </Box>
           </Box>

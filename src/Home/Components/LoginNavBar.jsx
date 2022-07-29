@@ -5,13 +5,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { blueGrey } from "@mui/material/colors";
 
-function HomeNavBar() {
+function LoginNavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: "#009688"}}>
+      <AppBar position="static" sx={{ bgcolor: "#009688", height: "0px"}}>
         <Toolbar>
           <Typography
             variant="h5"
@@ -21,9 +20,9 @@ function HomeNavBar() {
           >
             WinesDev
           </Typography>
-          <NavLink to={"/login"} className="NavLinkButton">
+          <NavLink to={"/"} className="NavLinkButton">
           <Button variant="content" color="action">
-            Login
+            Ver Productos
           </Button>
           </NavLink>
         </Toolbar>
@@ -32,4 +31,4 @@ function HomeNavBar() {
   );
 }
 
-export default HomeNavBar;
+export default LoginNavBar;

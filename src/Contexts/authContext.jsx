@@ -21,7 +21,7 @@ export function AuthContextProvider({ children }) {
   const login = useCallback(function (token) {
     sessionStorage.setItem("user", true);
     setGlobalToken(token);
-  }, []);
+  });
 
   const Admin = useCallback(function (token) {
     sessionStorage.setItem("admin", true);

@@ -44,13 +44,13 @@ function SearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }} className="navBar">
-      <AppBar position="static">
+      <AppBar position="static" sx={{ bgcolor: "#009688"}}>
         <Toolbar>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{ flexGrow: 1, display: { xs: "block", sm: "block" } }}
           >
             WinesDev
           </Typography>
@@ -68,7 +68,7 @@ function SearchAppBar() {
             </Button>
           </Link>
 
-          <Button variant="outlined" color="inherit" size="small"  onClick={outSession}>LogOut</Button>
+          <Button sx={{ml:1}} variant="outlined" color="inherit" size="small"  onClick={outSession}>Salir</Button>
         </Toolbar>
       </AppBar>
     </Box>

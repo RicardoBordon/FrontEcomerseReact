@@ -29,12 +29,12 @@ function Cart(){
     <>
       
       
-    <Container sx={{ py: 1 }} maxWidth="md">
-    <Typography gutterBottom variant="h5" component="div" align="center" sx={{ py: 3 }}>
+    <Container sx={{ py: 1, boxShadow: 24, bgcolor:"#009688"}} maxWidth="md">
+    <Typography gutterBottom variant="h6" component="div" align="center" sx={{ py: 1, m:3, boxShadow: 20, color: "white" }}>
       Carrito de Compras:
       </Typography> 
   
-    <Grid container spacing={3}>
+    <Grid container spacing={0}>
 
 
       {item.map((element) => ( 
@@ -46,7 +46,7 @@ function Cart(){
               {...(checked ? { timeout: 1200 } : {})}
             >
 
-        <Card sx={{ height: '90', display: 'flex', flexDirection: {md:'row',sm:'row', xs:'column', }, boxShadow:3, h: { xs: 200 } }} > 
+        <Card sx={{ display: 'flex', flexDirection: {md:'row',sm:'row', xs:'column', }, boxShadow: 18, h: { xs: 200 }, m:1}} > 
         <CardContent>
         <Typography gutterBottom variant="string" component="div" align="right">
             Art. N°{number}:
@@ -85,10 +85,12 @@ function Cart(){
       ))}
 
       
-      </Grid>
-      <Typography gutterBottom variant="h5" component="div" align="center" sx={{ py: 8 }}>
-          El precio total es:  $ {total},00
+      </Grid >
+      <CardContent>
+      <Typography gutterBottom variant="h6" component="div" align="center" sx={{ py: 2, m:5, color:"black", bgcolor:"#eeeeee", boxShadow: 24 }}>
+          El precio total es:<Typography variant="h5" sx={{m:1, color:"red", bgcolor:"#eeeeee", fontSize:"27px" }}>$ {total},00</Typography>
             </Typography>
+            </CardContent>  
       </Container>
   
     </>
