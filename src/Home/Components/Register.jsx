@@ -74,11 +74,11 @@ const SignupForm = () => {
       <CssBaseline />
       <AppBar
         position="absolute"
-        color="primary"
         elevation={4}
         sx={{
           position: "relative",
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
+          bgcolor: "#009688",
         }}
       >
         <Toolbar>

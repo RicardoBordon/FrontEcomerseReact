@@ -91,6 +91,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       setDataFilter(res)
     }
 
+    function FormatNumber({ number }) {
+      return (
+        <span style={{ color: "red" }}>
+          {new Intl.NumberFormat("ES-AR", {
+            style: "currency",
+            currency: "ARS"
+          }).format(number)}
+        </span>
+      );
+    }
+
   return (
   <>
 
@@ -137,7 +148,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
           </CardContent>
           <CardContent sx={{ bgcolor:"#eeeeee"}}>  
           <Typography gutterBottom variant="h6" component="div" align="center" mt={-1} sx={{ color:"#dd2c00", height: "15px"}}>
-          $ {element.price},00
+          <FormatNumber number={element.price}/>
           </Typography>   
           </CardContent>   
           <NavLink to={`/shop/${element.item}`} className="NavLinkButton" sx={{ bgcolor: "#461E23"}}><Button sx={{ width: "80%"}} variant="inherit">

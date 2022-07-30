@@ -1,7 +1,7 @@
 import React from "react";
 import Swal from 'sweetalert2';
 import { useState } from "react";
-import { Input, Grid, InputLabel, Button, TextareaAutosize, Link } from "@mui/material";
+import { Input, Grid, InputLabel, Button, TextareaAutosize, Link, CardMedia } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
@@ -10,8 +10,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuthContext } from "../../Contexts/authContext";
-import { Navigate, Outlet } from 'react-router-dom';
-import { ADMIN } from "../../Config/Routes/paths";
 
 const Create = () => {
   const [form, setForm] = useState({});
@@ -93,6 +91,34 @@ const Create = () => {
       })
     });
   }
+
+  function ImgPrev({ file }) {
+    if(file.name === undefined){
+      return (
+        <CardMedia
+        onChange={ImgPrev}
+        component="img"
+        alt="Vino"
+        height="180"
+        src="https://online.daisytek.com.mx/images/noImagen.jpg"
+        sx={{width: "180px", m:2}}
+      />
+      )
+    } 
+    else {
+      return (
+        <CardMedia
+        onChange={ImgPrev}
+        component="img"
+        alt="Vino"
+        height="280"
+        image= {URL.createObjectURL(file)}
+        sx={{width: "280px", m:2}}
+      />
+      )
+      
+    }
+  }
   
 
   const theme = createTheme();
@@ -126,6 +152,7 @@ const Create = () => {
             <Grid container spacing={3}>
               <Grid item xs={12} md={12} lg={12} sx={{ ml: 5, mt: 2, mb: 5 }}>
                 <form onSubmit={sendHandler}>
+                <ImgPrev file={file}></ImgPrev>
                   <InputLabel sx={{ color:"blueviolet"}} htmlFor="image">Imagen: </InputLabel>
                   <Input onChange={selectHandler} type="file" name="file" />
 

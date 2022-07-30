@@ -1,5 +1,5 @@
 import React from "react";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import {
   Input,
@@ -13,14 +13,15 @@ import {
   Typography,
   Paper,
   TextareaAutosize,
+  CardMedia,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuthContext } from "../../Contexts/authContext";
-import { Navigate, Outlet, useParams } from 'react-router-dom';
+import { Navigate, Outlet, useParams } from "react-router-dom";
 import { ADMIN } from "../../Config/Routes/paths";
 
 const Edit = () => {
-  const ID = useParams().id
+  const ID = useParams().id;
 
   //URL a API
   const base = import.meta.env.VITE_BASE_URL;
@@ -28,10 +29,10 @@ const Edit = () => {
   const endpoint2 = `/updateProduct/${ID}`;
 
   const [datas, setDatas] = useState([]);
-  const { globalAdminToken} = useAuthContext()
+  const { globalAdminToken } = useAuthContext();
 
   useEffect(() => {
-    fetch(base+endpoint1, {
+    fetch(base + endpoint1, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +47,7 @@ const Edit = () => {
 
   const [form, setForm] = useState({});
   const [file, setFile] = useState([]);
-
+  
   //cambia estado al recibir una imagen
 
   function selectHandler(e) {
@@ -63,7 +64,7 @@ const Edit = () => {
       [e.target.price]: e.target.value,
       [e.target.description]: e.target.value,
       [e.target.cstock]: e.target.value,
-    })
+    });
     setDatas("");
   };
 
@@ -71,10 +72,10 @@ const Edit = () => {
   const sendHandler = () => {
     if (!file) {
       Swal.fire({
-        text: 'No hay archivo!',
-        icon: 'warning',
-        confirmButtonText: 'Ok'
-      })
+        text: "No hay archivo!",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      });
       return;
     }
     const formdata = new FormData();
@@ -92,31 +93,57 @@ const Edit = () => {
       method: "POST",
       body: formdata,
     })
-  .then(function (response) {
-    console.log(response)
-    if(response.ok === true){
-      Swal.fire({
-        text: 'Actualizado correctamente',
-        icon: 'success',
-        confirmButtonText: 'Ok'
+      .then(function (response) {
+        console.log(response);
+        if (response.ok === true) {
+          Swal.fire({
+            text: "Actualizado correctamente",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        } else if (response.ok === false) {
+          Swal.fire({
+            text: "Error al registrar",
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
+        }
       })
-    }
-    else if(response.ok === false){
-      Swal.fire({
-        text: 'Error al registrar',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      })
-    }
-  })
-  .catch(function (error) {
-    alert("Error en servidor")
-  });
-}
-
-
+      .catch(function (error) {
+        alert("Error en servidor");
+      });
+  };
 
   const theme = createTheme();
+
+  
+  function ImgPrev({ file }) {
+    if(file.name === undefined){
+      return (
+        <CardMedia
+        onChange={ImgPrev}
+        component="img"
+        alt="Vino"
+        height="320"
+        image= {image}
+        sx={{width: "320px", m:2}}
+      />
+      )
+    } 
+    else {
+      return (
+        <CardMedia
+        onChange={ImgPrev}
+        component="img"
+        alt="Vino"
+        height="320"
+        image= {URL.createObjectURL(file)}
+        sx={{width: "350px", m:2}}
+      />
+      )
+      
+    }
+  }
 
   return (
     <>
@@ -128,7 +155,7 @@ const Edit = () => {
           sx={{
             position: "relative",
             borderBottom: (t) => `1px solid ${t.palette.divider}`,
-            bgcolor:"black",
+            bgcolor: "black",
           }}
         >
           <Toolbar>
@@ -137,25 +164,36 @@ const Edit = () => {
             </Typography>
           </Toolbar>
         </AppBar>
-        
+
         <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
           <Paper
             elevation={24}
             variant="elevation"
             sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
           >
-            <img src={file} style={{ width: "300px" }} />
+            
 
             <Grid container spacing={3}>
               <Grid item xs={12} md={12} lg={12} sx={{ ml: 5, mt: 2, mb: 5 }}>
                 <form onSubmit={sendHandler}>
-                  <InputLabel sx={{ color:"blueviolet"}} htmlFor="image">
+                  <ImgPrev file={file}></ImgPrev>
+
+
+                  <InputLabel sx={{ color: "blueviolet" }} htmlFor="image">
                     Imagen:{" "}
                   </InputLabel>
 
-                  <Input onChange={selectHandler} type="file" name="file" required/>
+                  <Input
+                    onChange={selectHandler}
+                    type="file"
+                    name="file"
+                    required
+                  />
 
-                  <InputLabel sx={{ mt: 4, color:"blueviolet"  }} htmlFor="item">
+                  <InputLabel
+                    sx={{ mt: 4, color: "blueviolet" }}
+                    htmlFor="item"
+                  >
                     Item n:{" "}
                   </InputLabel>
                   <Input
@@ -167,7 +205,10 @@ const Edit = () => {
                     onChange={handleChange}
                     disabled
                   ></Input>
-                  <InputLabel sx={{ mt: 4, color:"blueviolet"  }} htmlFor="name">
+                  <InputLabel
+                    sx={{ mt: 4, color: "blueviolet" }}
+                    htmlFor="name"
+                  >
                     Nombre:{" "}
                   </InputLabel>
                   <Input
@@ -179,7 +220,10 @@ const Edit = () => {
                     onChange={handleChange}
                     required
                   ></Input>
-                  <InputLabel sx={{ mt: 4,color:"blueviolet"}} htmlFor="price">
+                  <InputLabel
+                    sx={{ mt: 4, color: "blueviolet" }}
+                    htmlFor="price"
+                  >
                     Precio (int):{" "}
                   </InputLabel>
                   <Input
@@ -191,11 +235,13 @@ const Edit = () => {
                     onChange={handleChange}
                     required
                   ></Input>
-                  <InputLabel sx={{ mt: 4, color:"blueviolet"  }} htmlFor="description">
+                  <InputLabel
+                    sx={{ mt: 4, color: "blueviolet" }}
+                    htmlFor="description"
+                  >
                     Descripcion:{" "}
                   </InputLabel>
                   <TextareaAutosize
-
                     id="description"
                     name="description"
                     type="string"
@@ -204,7 +250,10 @@ const Edit = () => {
                     required
                     style={{ width: "88%" }}
                   ></TextareaAutosize>
-                  <InputLabel sx={{ mt: 4, color:"blueviolet" }} htmlFor="cstock">
+                  <InputLabel
+                    sx={{ mt: 4, color: "blueviolet" }}
+                    htmlFor="cstock"
+                  >
                     c.stock:{" "}
                   </InputLabel>
                   <Input
@@ -216,16 +265,15 @@ const Edit = () => {
                     onChange={handleChange}
                     required
                   ></Input>
-                <Button
-                  sx={{ mt: 8, width: "88%" }}
-                  variant="contained"
-                  color="primary"
-                  onClick={sendHandler}
-                >
-                  Validar Cambios
-                </Button>
+                  <Button
+                    sx={{ mt: 8, width: "88%" }}
+                    variant="contained"
+                    color="primary"
+                    onClick={sendHandler}
+                  >
+                    Validar Cambios
+                  </Button>
                 </form>
-
               </Grid>
             </Grid>
           </Paper>

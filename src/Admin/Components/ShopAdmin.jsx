@@ -92,6 +92,17 @@ function ShopAdmin() {
     setDataFilter(res);
   };
 
+  function FormatNumber({ number }) {
+    return (
+      <span style={{ color: "red" }}>
+        {new Intl.NumberFormat("ES-AR", {
+          style: "currency",
+          currency: "ARS"
+        }).format(number)}
+      </span>
+    );
+  }
+
   return (
     <>
       <Container sx={{ py: 2, boxShadow: 4 }} maxWidth="md">
@@ -151,7 +162,7 @@ function ShopAdmin() {
                   </CardContent>
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="div" align="center"  sx={{ color:"#dd2c00", height: "15px"}}>
-                      $ {element.price},00
+                    <FormatNumber number={element.price}/>
                     </Typography>
                   </CardContent>
  
