@@ -10,18 +10,17 @@ const Delete = () => {
   const base = import.meta.env.VITE_BASE_URL;
   const endpoint = `/deleteProduct/${ID}`;
 
-  fetch(base + endpoint, {
+  async function Del(){ 
+  await fetch(base + endpoint, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + globalAdminToken.tokenAdmin,
     },
   })
-  function saludos(){
-    console.log("Hola Mundo");
-  }
-  
-  setTimeout(4000);
+}
+Del();
+
     return <Navigate to={ADMIN} />;
 };
 
