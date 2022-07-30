@@ -28,7 +28,7 @@ export function AuthContextProvider({ children }) {
     setAdminGlobalToken(token);
   }, []);
 
-  const Logout = useCallback(async function () {
+  const Logout = useCallback(function () {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("admin");
     setGlobalToken("");

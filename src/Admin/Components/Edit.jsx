@@ -19,6 +19,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuthContext } from "../../Contexts/authContext";
 import { Navigate, Outlet, useParams } from "react-router-dom";
 import { ADMIN } from "../../Config/Routes/paths";
+import { blue } from "@mui/material/colors";
 
 const Edit = () => {
   const ID = useParams().id;
@@ -94,7 +95,7 @@ const Edit = () => {
       body: formdata,
     })
       .then(function (response) {
-        console.log(response);
+
         if (response.ok === true) {
           Swal.fire({
             text: "Actualizado correctamente",
@@ -124,9 +125,9 @@ const Edit = () => {
         onChange={ImgPrev}
         component="img"
         alt="Vino"
-        height="320"
+        height="100%"
         image= {image}
-        sx={{width: "320px", m:2}}
+        sx={{width: "250px", m:2}}
       />
       )
     } 
@@ -136,9 +137,9 @@ const Edit = () => {
         onChange={ImgPrev}
         component="img"
         alt="Vino"
-        height="320"
+        height="100%"
         image= {URL.createObjectURL(file)}
-        sx={{width: "350px", m:2}}
+        sx={{width: "250px", m:2}}
       />
       )
       
@@ -173,7 +174,7 @@ const Edit = () => {
           >
             
 
-            <Grid container spacing={3}>
+            <Grid container spacing={5}>
               <Grid item xs={12} md={12} lg={12} sx={{ ml: 5, mt: 2, mb: 5 }}>
                 <form onSubmit={sendHandler}>
                   <ImgPrev file={file}></ImgPrev>
@@ -184,6 +185,7 @@ const Edit = () => {
                   </InputLabel>
 
                   <Input
+                    sx={{ width: "88%" }}
                     onChange={selectHandler}
                     type="file"
                     name="file"

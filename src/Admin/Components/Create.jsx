@@ -99,7 +99,7 @@ const Create = () => {
         onChange={ImgPrev}
         component="img"
         alt="Vino"
-        height="180"
+        height="100%"
         src="https://online.daisytek.com.mx/images/noImagen.jpg"
         sx={{width: "180px", m:2}}
       />
@@ -111,9 +111,9 @@ const Create = () => {
         onChange={ImgPrev}
         component="img"
         alt="Vino"
-        height="280"
+        height="100%"
         image= {URL.createObjectURL(file)}
-        sx={{width: "280px", m:2}}
+        sx={{width: "250px", m:2}}
       />
       )
       
@@ -153,8 +153,12 @@ const Create = () => {
               <Grid item xs={12} md={12} lg={12} sx={{ ml: 5, mt: 2, mb: 5 }}>
                 <form onSubmit={sendHandler}>
                 <ImgPrev file={file}></ImgPrev>
-                  <InputLabel sx={{ color:"blueviolet"}} htmlFor="image">Imagen: </InputLabel>
-                  <Input onChange={selectHandler} type="file" name="file" />
+                  <InputLabel sx={{ color:"blueviolet"}} htmlFor="image"
+                  
+                  >Imagen: </InputLabel>
+                  <Input
+                  sx={{ width: "88%" }}
+                  onChange={selectHandler} type="file" name="file" />
 
                   <InputLabel sx={{ mt: 4, color:"blueviolet" }} htmlFor="item">
                     Item n:{" "}
@@ -193,7 +197,7 @@ const Create = () => {
                     required
                   ></Input>
                   <InputLabel sx={{ mt: 4, color:"blueviolet" }} htmlFor="description">
-                    Dasescripcion:{" "}
+                    Descripcion:{" "}
                   </InputLabel>
                   <TextareaAutosize
                     sx={{ width: "88%" }}
