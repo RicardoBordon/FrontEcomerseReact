@@ -17,7 +17,11 @@ const Delete = () => {
       Authorization: "Bearer " + globalAdminToken.tokenAdmin,
     },
   })
-
+  function saludos(){
+    console.log("Hola Mundo");
+  }
+  
+  setTimeout(4000);
     return <Navigate to={ADMIN} />;
 };
 

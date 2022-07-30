@@ -14,7 +14,7 @@ import { useAuthContext } from "../../Contexts/authContext";
 const Create = () => {
   const [form, setForm] = useState({});
   const [file, setFile] = useState([]);
-  const { globalAdminToken} = useAuthContext()
+  const {globalAdminToken} = useAuthContext()
 
   //URL a API
   const base = import.meta.env.VITE_BASE_URL;
