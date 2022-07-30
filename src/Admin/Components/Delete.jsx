@@ -12,13 +12,14 @@ const Delete = () => {
   await fetch(base + endpoint, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       Authorization: "Bearer " + globalAdminToken.tokenAdmin,
     },
   })
 }
 
-    return <Navigate to={ADMIN} />;
+setTimeout(function(){
+  return <Navigate to={ADMIN} />;
+}, 5000);
 
 
 export default Delete;
