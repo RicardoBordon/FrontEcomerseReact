@@ -1,5 +1,6 @@
 import { useAuthContext } from "../../Contexts/authContext";
-import {useParams } from 'react-router-dom';
+import Swal from "sweetalert2";
+import { Navigate, Outlet, useParams } from 'react-router-dom';
 import { ADMIN } from "../../Config/Routes/paths";
 
 const Delete = () => {
@@ -9,17 +10,15 @@ const Delete = () => {
   const base = import.meta.env.VITE_BASE_URL;
   const endpoint = `/deleteProduct/${ID}`;
 
-  await fetch(base + endpoint, {
+  fetch(base + endpoint, {
     method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Authorization: "Bearer " + globalAdminToken.tokenAdmin,
     },
   })
-}
 
-setTimeout(function(){
-  return <Navigate to={ADMIN} />;
-}, 5000);
-
+    return <Navigate to={ADMIN} />;
+};
 
 export default Delete;
